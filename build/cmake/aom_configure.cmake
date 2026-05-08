@@ -243,7 +243,7 @@ endif()
 if(AOM_TARGET_SYSTEM STREQUAL "Windows")
   # The default _WIN32_WINNT value in MinGW is 0x0502 (Windows XP with SP2). Set
   # it to 0x0601 (Windows 7).
-  add_compiler_flag_if_supported("-D_WIN32_WINNT=0x0601")
+  add_compiler_flag_if_supported("-D_WIN32_WINNT=0x0501")
   # Quiet warnings related to fopen, printf, etc.
   add_compiler_flag_if_supported("-D_CRT_SECURE_NO_WARNINGS")
 endif()
@@ -301,6 +301,18 @@ endif()
 
 # Test compiler flags.
 if(MSVC)
+  # Optimize
+  add_compiler_flag_if_supported("-O2")
+  add_compiler_flag_if_supported("-Ob2ity-")
+  add_compiler_flag_if_supported("-GS-")
+  add_compiler_flag_if_supported("-GFAT")
+  add_compiler_flag_if_supported("-Qpar")
+  add_compiler_flag_if_supported("-Qfast_transcendentals")
+
+  # winzoz XP
+  require_linker_flag("/SUBSYSTEM:CONSOLE,5.1 /opt:REF,ICF")
+
+
   # It isn't possible to specify C99 conformance for MSVC.
   add_cxx_flag_if_supported("/std:c++17")
   add_compiler_flag_if_supported("/W3")
