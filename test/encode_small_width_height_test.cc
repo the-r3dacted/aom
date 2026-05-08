@@ -25,7 +25,8 @@
 namespace {
 
 // Dummy buffer of zero samples.
-constexpr unsigned char kBuffer[2 * (256 * 512 + 2 * 128 * 256)] = { 0 };
+constexpr size_t kBufferSize = 2 * (256 * 512 + 2 * 128 * 256);
+static const unsigned char kBuffer[kBufferSize] = { 0 };
 #if CONFIG_REALTIME_ONLY
 const int kUsage = 1;
 #else
